@@ -3,7 +3,7 @@ applications:
   path: ./applications/timesheets-server/build/libs/timesheets-server.jar
   routes:
   - route: timesheets-pal-56f6f27f-4093-44ae-a674-0c982f7e1c96.cfapps.io
-  memory: 256M
+  memory: 1G
   buildpacks:
   - java_buildpack
   instances: 1
