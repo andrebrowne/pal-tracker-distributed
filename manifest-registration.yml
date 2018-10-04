@@ -3,7 +3,10 @@ applications:
   path: ./applications/registration-server/build/libs/registration-server.jar
   routes:
   - route: registration-pal-56f6f27f-4093-44ae-a674-0c982f7e1c96.cfapps.io
-  memory: 1G
+  memory: 256M
+  buildpacks:
+  - java_buildpack
   instances: 1
   services:
+  - tracker-service-registry
   - tracker-registration-database
