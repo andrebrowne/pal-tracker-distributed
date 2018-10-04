@@ -9,7 +9,7 @@
 			"name": "localhost",
 			"item": [
 				{
-					"name": "registration - Create Pete",
+					"name": "registration - Create registration",
 					"event": [
 						{
 							"listen": "test",
@@ -32,7 +32,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"name\": \"Pete\"}"
+							"raw": "{\n\t\"name\": \"{{USER_NAME}} ({{$guid}})\"\n}"
 						},
 						"url": {
 							"raw": "localhost:8083/registration",
@@ -818,11 +818,916 @@
 			]
 		},
 		{
-			"name": "dev",
-			"item": []
+			"name": "review",
+			"item": [
+				{
+					"name": "registration - Create registration",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "531f68a0-8eba-45ae-9a07-19f51904de88",
+								"type": "text/javascript",
+								"exec": [
+									"pm.globals.set(\"USER_ID\", pm.response.json().id);",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,201,202]);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"{{USER_NAME}} ({{$guid}})\"\n}"
+						},
+						"url": {
+							"raw": "https://registration-pal-{{UUID}}.cfapps.io/registration",
+							"protocol": "https",
+							"host": [
+								"registration-pal-{{UUID}}",
+								"cfapps",
+								"io"
+							],
+							"path": [
+								"registration"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "registration - Create Pete",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"disabled": false
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"name\": \"Pete\"}"
+								},
+								"url": {
+									"raw": "localhost:8083/registration",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 04 Oct 2018 14:41:38 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"name": "Transfer-Encoding",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								}
+							],
+							"cookie": [],
+							"body": "{\"id\":1,\"name\":\"Pete\",\"info\":\"registration info\"}"
+						}
+					]
+				},
+				{
+					"name": "users - Read by user id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2c0cd225-67ec-473f-8960-a0776c2c4293",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"projectid\": 123,\n\t\"userid\": 456,\n    \"hours\": 10,\n    \"date\": \"2018-10-02\"\n}"
+						},
+						"url": {
+							"raw": "https://registration-pal-{{UUID}}.cfapps.io/users/{{USER_ID}}",
+							"protocol": "https",
+							"host": [
+								"registration-pal-{{UUID}}",
+								"cfapps",
+								"io"
+							],
+							"path": [
+								"users",
+								"{{USER_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "accounts - Read by owner id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ddadba9a-f5b0-414a-86ed-9dd1ec3d49bb",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "2cac2a84-f785-4b46-8878-e91e5bb8aae0",
+								"type": "text/javascript",
+								"exec": [
+									"pm.globals.set(\"ACCOUNT_ID\", pm.response.json()[0].id);",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"projectid\": 123,\n\t\"userid\": 456,\n    \"hours\": 10,\n    \"date\": \"2018-10-02\"\n}"
+						},
+						"url": {
+							"raw": "https://registration-pal-{{UUID}}.cfapps.io/accounts?ownerId={{USER_ID}}",
+							"protocol": "https",
+							"host": [
+								"registration-pal-{{UUID}}",
+								"cfapps",
+								"io"
+							],
+							"path": [
+								"accounts"
+							],
+							"query": [
+								{
+									"key": "ownerId",
+									"value": "{{USER_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "projects - Create Basket Weaving",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6df61832-bb96-453d-bcd6-5794981d0fd2",
+								"type": "text/javascript",
+								"exec": [
+									"pm.globals.set(\"PROJECT_ID\", pm.response.json().id);",
+									"",
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "AccountId",
+								"value": "{{ACCOUNT_ID}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Basket Weaving ({{$guid}})\",\n\t\"accountId\": {{ACCOUNT_ID}}\n}"
+						},
+						"url": {
+							"raw": "https://registration-pal-{{UUID}}.cfapps.io/projects",
+							"protocol": "https",
+							"host": [
+								"registration-pal-{{UUID}}",
+								"cfapps",
+								"io"
+							],
+							"path": [
+								"projects"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "registration - Create Pete",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"disabled": false
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"name\": \"Pete\"}"
+								},
+								"url": {
+									"raw": "localhost:8083/registration",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 04 Oct 2018 14:41:38 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"name": "Transfer-Encoding",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								}
+							],
+							"cookie": [],
+							"body": "{\"id\":1,\"name\":\"Pete\",\"info\":\"registration info\"}"
+						}
+					]
+				},
+				{
+					"name": "projects - Read by account id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ddadba9a-f5b0-414a-86ed-9dd1ec3d49bb",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "56a19178-2279-4673-9e07-963abe0b0a39",
+								"type": "text/javascript",
+								"exec": [
+									"pm.globals.set(\"PROJECT_ID\", pm.response.json()[0].id);",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "ProjectId",
+								"value": "{{PROJECT_ID}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"projectid\": 123,\n\t\"userid\": 456,\n    \"hours\": 10,\n    \"date\": \"2018-10-02\"\n}"
+						},
+						"url": {
+							"raw": "https://registration-pal-{{UUID}}.cfapps.io/projects?accountId={{ACCOUNT_ID}}",
+							"protocol": "https",
+							"host": [
+								"registration-pal-{{UUID}}",
+								"cfapps",
+								"io"
+							],
+							"path": [
+								"projects"
+							],
+							"query": [
+								{
+									"key": "accountId",
+									"value": "{{ACCOUNT_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "allocations - Create allocation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e858261c-7c8d-40d3-bb9f-a4409f0f5858",
+								"type": "text/javascript",
+								"exec": [
+									"pm.globals.set(\"ALLOCATION_ID\", pm.response.json().id);",
+									"",
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "ProjectId",
+								"value": "{{PROJECT_ID}}"
+							},
+							{
+								"key": "UserID",
+								"value": "{{USER_ID}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"projectId\": {{PROJECT_ID}}, \n\t\"userId\": {{USER_ID}},\n\t\"firstDay\": \"2015-05-17\",\n\t\"lastDay\": \"2015-05-18\"\n\t\n}"
+						},
+						"url": {
+							"raw": "https://allocations-pal-{{UUID}}.cfapps.io//allocations",
+							"protocol": "https",
+							"host": [
+								"allocations-pal-{{UUID}}",
+								"cfapps",
+								"io"
+							],
+							"path": [
+								"",
+								"allocations"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "registration - Create Pete",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"disabled": false
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"name\": \"Pete\"}"
+								},
+								"url": {
+									"raw": "localhost:8083/registration",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 04 Oct 2018 14:41:38 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"name": "Transfer-Encoding",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								}
+							],
+							"cookie": [],
+							"body": "{\"id\":1,\"name\":\"Pete\",\"info\":\"registration info\"}"
+						}
+					]
+				},
+				{
+					"name": "allocations - Read by project id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ddadba9a-f5b0-414a-86ed-9dd1ec3d49bb",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "bc81ea30-4845-475b-8403-4a683ef81b72",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "ProjectId",
+								"value": "{{PROJECT_ID}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"projectid\": 123,\n\t\"userid\": 456,\n    \"hours\": 10,\n    \"date\": \"2018-10-02\"\n}"
+						},
+						"url": {
+							"raw": "https://allocations-pal-{{UUID}}.cfapps.io/allocations?projectId={{PROJECT_ID}}",
+							"protocol": "https",
+							"host": [
+								"allocations-pal-{{UUID}}",
+								"cfapps",
+								"io"
+							],
+							"path": [
+								"",
+								"allocations"
+							],
+							"query": [
+								{
+									"key": "projectId",
+									"value": "{{PROJECT_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "stories - Create story",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0362e818-8b8e-4255-b2c9-f18516962116",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "ProjectId",
+								"value": "{{PROJECT_ID}}"
+							},
+							{
+								"key": "UserID",
+								"value": "{{USER_ID}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"projectId\": {{PROJECT_ID}}, \n\t\"name\": \"Find some reeds\"\n}"
+						},
+						"url": {
+							"raw": "https://backlog-pal-{{UUID}}.cfapps.io//stories",
+							"protocol": "https",
+							"host": [
+								"backlog-pal-{{UUID}}",
+								"cfapps",
+								"io"
+							],
+							"path": [
+								"",
+								"stories"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "registration - Create Pete",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"disabled": false
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"name\": \"Pete\"}"
+								},
+								"url": {
+									"raw": "localhost:8083/registration",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 04 Oct 2018 14:41:38 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"name": "Transfer-Encoding",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								}
+							],
+							"cookie": [],
+							"body": "{\"id\":1,\"name\":\"Pete\",\"info\":\"registration info\"}"
+						}
+					]
+				},
+				{
+					"name": "stories - Read by project id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ddadba9a-f5b0-414a-86ed-9dd1ec3d49bb",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "d975deac-abd5-49b8-a274-8fe3f1eac15b",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "ProjectId",
+								"value": "{{PROJECT_ID}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"projectid\": 123,\n\t\"userid\": 456,\n    \"hours\": 10,\n    \"date\": \"2018-10-02\"\n}"
+						},
+						"url": {
+							"raw": "https://backlog-pal-{{UUID}}.cfapps.io/stories?projectId={{PROJECT_ID}}",
+							"protocol": "https",
+							"host": [
+								"backlog-pal-{{UUID}}",
+								"cfapps",
+								"io"
+							],
+							"path": [
+								"",
+								"stories"
+							],
+							"query": [
+								{
+									"key": "projectId",
+									"value": "{{PROJECT_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "time-entries - Create time entry",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "146f45be-b28a-493c-a548-1f9db22caf39",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "ProjectId",
+								"value": "{{PROJECT_ID}}"
+							},
+							{
+								"key": "UserID",
+								"value": "{{USER_ID}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"projectId\": {{PROJECT_ID}}, \n\t\"userId\": {{USER_ID}},\n\t\"date\": \"2015-05-17\",\n\t\"hours\": 6\n\t\n}"
+						},
+						"url": {
+							"raw": "https://timesheets-pal-{{UUID}}.cfapps.io//time-entries",
+							"protocol": "https",
+							"host": [
+								"timesheets-pal-{{UUID}}",
+								"cfapps",
+								"io"
+							],
+							"path": [
+								"",
+								"time-entries"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "registration - Create Pete",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"disabled": false
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"name\": \"Pete\"}"
+								},
+								"url": {
+									"raw": "localhost:8083/registration",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 04 Oct 2018 14:41:38 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"name": "Transfer-Encoding",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								}
+							],
+							"cookie": [],
+							"body": "{\"id\":1,\"name\":\"Pete\",\"info\":\"registration info\"}"
+						}
+					]
+				},
+				{
+					"name": "time-entries - Read by user id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ddadba9a-f5b0-414a-86ed-9dd1ec3d49bb",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "64cc33ad-9a9a-4136-b94d-332bce997066",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "ProjectId",
+								"value": "{{PROJECT_ID}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"projectid\": 123,\n\t\"userid\": 456,\n    \"hours\": 10,\n    \"date\": \"2018-10-02\"\n}"
+						},
+						"url": {
+							"raw": "https://timesheets-pal-{{UUID}}.cfapps.io/time-entries?userId={{USER_ID}}",
+							"protocol": "https",
+							"host": [
+								"timesheets-pal-{{UUID}}",
+								"cfapps",
+								"io"
+							],
+							"path": [
+								"time-entries"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "{{USER_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "db444c54-b948-451b-9187-2340c3403f5c",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "d0bb7bbf-cd65-43b3-9108-4bdb47126177",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
 		},
 		{
-			"name": "review",
+			"name": "dev",
 			"item": []
 		}
 	]
