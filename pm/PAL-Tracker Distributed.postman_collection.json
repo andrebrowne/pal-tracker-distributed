@@ -1,0 +1,829 @@
+{
+	"info": {
+		"_postman_id": "1f5b7dc8-f6f4-4d42-9a0d-5e189db4b630",
+		"name": "PAL-Tracker Distributed",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost",
+			"item": [
+				{
+					"name": "registration - Create Pete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "359a83f9-19cf-47da-bb9a-bbb9392054c0",
+								"type": "text/javascript",
+								"exec": [
+									"pm.globals.set(\"USER_ID\", pm.response.json().id);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\": \"Pete\"}"
+						},
+						"url": {
+							"raw": "localhost:8083/registration",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"registration"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "registration - Create Pete",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"disabled": false
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"name\": \"Pete\"}"
+								},
+								"url": {
+									"raw": "localhost:8083/registration",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 04 Oct 2018 14:41:38 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"name": "Transfer-Encoding",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								}
+							],
+							"cookie": [],
+							"body": "{\"id\":1,\"name\":\"Pete\",\"info\":\"registration info\"}"
+						}
+					]
+				},
+				{
+					"name": "users - Read by user id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"projectid\": 123,\n\t\"userid\": 456,\n    \"hours\": 10,\n    \"date\": \"2018-10-02\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8083/users/{{USER_ID}}",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"users",
+								"{{USER_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "accounts - Read by owner id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ddadba9a-f5b0-414a-86ed-9dd1ec3d49bb",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "28c4c44f-aca1-4aa6-b1da-39d2c6e6bd69",
+								"type": "text/javascript",
+								"exec": [
+									"pm.globals.set(\"ACCOUNT_ID\", pm.response.json()[0].id);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"projectid\": 123,\n\t\"userid\": 456,\n    \"hours\": 10,\n    \"date\": \"2018-10-02\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8083/accounts?ownerId={{USER_ID}}",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"accounts"
+							],
+							"query": [
+								{
+									"key": "ownerId",
+									"value": "{{USER_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "projects - Create Basket Weaving",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "314ed8d3-67de-4397-bbf2-43d49acbd392",
+								"type": "text/javascript",
+								"exec": [
+									"pm.globals.set(\"PROJECT_ID\", pm.response.json().id);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "AccountId",
+								"value": "{{ACCOUNT_ID}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Basket Weaving\",\n\t\"accountId\": {{ACCOUNT_ID}}\n}"
+						},
+						"url": {
+							"raw": "localhost:8083/projects",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"projects"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "registration - Create Pete",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"disabled": false
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"name\": \"Pete\"}"
+								},
+								"url": {
+									"raw": "localhost:8083/registration",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 04 Oct 2018 14:41:38 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"name": "Transfer-Encoding",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								}
+							],
+							"cookie": [],
+							"body": "{\"id\":1,\"name\":\"Pete\",\"info\":\"registration info\"}"
+						}
+					]
+				},
+				{
+					"name": "projects - Read by account id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ddadba9a-f5b0-414a-86ed-9dd1ec3d49bb",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "f605df8a-275f-4fd7-86f1-19b8be0c6596",
+								"type": "text/javascript",
+								"exec": [
+									"pm.globals.set(\"PROJECT_ID\", pm.response.json()[0].id);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "ProjectId",
+								"value": "{{PROJECT_ID}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"projectid\": 123,\n\t\"userid\": 456,\n    \"hours\": 10,\n    \"date\": \"2018-10-02\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8083/projects?accountId={{ACCOUNT_ID}}",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"projects"
+							],
+							"query": [
+								{
+									"key": "accountId",
+									"value": "{{ACCOUNT_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "allocations - Create allocation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "338ae990-0e0e-442c-9aff-1ec1a7224a21",
+								"type": "text/javascript",
+								"exec": [
+									"pm.globals.set(\"ALLOCATION_ID\", pm.response.json().id);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "ProjectId",
+								"value": "{{PROJECT_ID}}"
+							},
+							{
+								"key": "UserID",
+								"value": "{{USER_ID}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"projectId\": {{PROJECT_ID}}, \n\t\"userId\": {{USER_ID}},\n\t\"firstDay\": \"2015-05-17\",\n\t\"lastDay\": \"2015-05-18\"\n\t\n}"
+						},
+						"url": {
+							"raw": "localhost:8081/allocations",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"allocations"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "registration - Create Pete",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"disabled": false
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"name\": \"Pete\"}"
+								},
+								"url": {
+									"raw": "localhost:8083/registration",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 04 Oct 2018 14:41:38 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"name": "Transfer-Encoding",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								}
+							],
+							"cookie": [],
+							"body": "{\"id\":1,\"name\":\"Pete\",\"info\":\"registration info\"}"
+						}
+					]
+				},
+				{
+					"name": "allocations - Read by project id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ddadba9a-f5b0-414a-86ed-9dd1ec3d49bb",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "82851d65-a060-4e56-a378-1c0ffb44685b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "ProjectId",
+								"value": "{{PROJECT_ID}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"projectid\": 123,\n\t\"userid\": 456,\n    \"hours\": 10,\n    \"date\": \"2018-10-02\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8081/allocations?projectId={{PROJECT_ID}}",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"allocations"
+							],
+							"query": [
+								{
+									"key": "projectId",
+									"value": "{{PROJECT_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "stories - Create story",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e2476bbb-e601-4a83-a1b2-3d42c6179007",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "ProjectId",
+								"value": "{{PROJECT_ID}}"
+							},
+							{
+								"key": "UserID",
+								"value": "{{USER_ID}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"projectId\": {{PROJECT_ID}}, \n\t\"name\": \"Find some reeds\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8082/stories",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"stories"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "registration - Create Pete",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"disabled": false
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"name\": \"Pete\"}"
+								},
+								"url": {
+									"raw": "localhost:8083/registration",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 04 Oct 2018 14:41:38 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"name": "Transfer-Encoding",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								}
+							],
+							"cookie": [],
+							"body": "{\"id\":1,\"name\":\"Pete\",\"info\":\"registration info\"}"
+						}
+					]
+				},
+				{
+					"name": "stories - Read by project id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ddadba9a-f5b0-414a-86ed-9dd1ec3d49bb",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a985311c-5f13-44ee-b1cf-3d20de2201ee",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "ProjectId",
+								"value": "{{PROJECT_ID}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"projectid\": 123,\n\t\"userid\": 456,\n    \"hours\": 10,\n    \"date\": \"2018-10-02\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8082/stories?projectId={{PROJECT_ID}}",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"stories"
+							],
+							"query": [
+								{
+									"key": "projectId",
+									"value": "{{PROJECT_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "time-entries - Create time entry",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a96d9727-cbc8-4c8b-b124-c205412525c1",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "ProjectId",
+								"value": "{{PROJECT_ID}}"
+							},
+							{
+								"key": "UserID",
+								"value": "{{USER_ID}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"projectId\": {{PROJECT_ID}}, \n\t\"userId\": {{USER_ID}},\n\t\"date\": \"2015-05-17\",\n\t\"hours\": 6\n\t\n}"
+						},
+						"url": {
+							"raw": "localhost:8084/time-entries",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"time-entries"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "registration - Create Pete",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"disabled": false
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"name\": \"Pete\"}"
+								},
+								"url": {
+									"raw": "localhost:8083/registration",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 04 Oct 2018 14:41:38 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"name": "Transfer-Encoding",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								}
+							],
+							"cookie": [],
+							"body": "{\"id\":1,\"name\":\"Pete\",\"info\":\"registration info\"}"
+						}
+					]
+				},
+				{
+					"name": "time-entries - Read by user id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ddadba9a-f5b0-414a-86ed-9dd1ec3d49bb",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "4bbae2ba-b648-4cc0-bbc4-6e1db46b79a3",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "ProjectId",
+								"value": "{{PROJECT_ID}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"projectid\": 123,\n\t\"userid\": 456,\n    \"hours\": 10,\n    \"date\": \"2018-10-02\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8084/time-entries?userId={{USER_ID}}",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"time-entries"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "{{USER_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "dev",
+			"item": []
+		},
+		{
+			"name": "review",
+			"item": []
+		}
+	]
+}
