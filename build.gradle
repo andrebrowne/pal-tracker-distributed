@@ -9,6 +9,8 @@ buildscript {
         //springCloudServicesVersion = "1.6.0.RELEASE"
         springCloudDependenciesVersion = "Dalston.SR1"
         springCloudServicesVersion = "1.5.0.RELEASE"
+        springCloudSsoVersion = "2.1.3.RELEASE"
+
     }
 
     repositories {
