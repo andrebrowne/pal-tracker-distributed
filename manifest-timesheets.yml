@@ -3,11 +3,18 @@ applications:
   path: ./applications/timesheets-server/build/libs/timesheets-server.jar
   routes:
   - route: timesheets-pal-56f6f27f-4093-44ae-a674-0c982f7e1c96.cfapps.io
-  buildpacks:
-  - java_buildpack
   memory: 1G
   instances: 1
+  env:
+    GRANT_TYPE: client_credentials
+    SECURITY_USER_NAME: actuator
+    SECURITY_USER_PASSWORD: operations4red
   services:
-  - tracker-service-registry
   - tracker-timesheets-database
+  - tracker-service-registry
   - tracker-circuit-breaker-dashboard
+  - tracker-sso
+  - tracker-registration-database
+  buildpacks:
+  - java_buildpack
+
