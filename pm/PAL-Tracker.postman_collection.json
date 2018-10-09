@@ -1,0 +1,333 @@
+{
+	"info": {
+		"_postman_id": "c0e48a7a-5d0a-43b7-99fc-be60a73e9b33",
+		"name": "PAL-Tracker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost",
+			"item": [
+				{
+					"name": "localhost:8080/time-entries",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"projectid\": 123,\n\t\"userid\": 456,\n    \"hours\": 10,\n    \"date\": \"2018-10-02\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/time-entries",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"time-entries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/time-entries",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"projectid\": 123,\n\t\"userid\": 456,\n    \"hours\": 10,\n    \"date\": \"2018-10-02\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/time-entries",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"time-entries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/time-entries",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"projectid\": 123,\n\t\"userid\": 456,\n    \"hours\": 10,\n    \"date\": \"2018-10-02\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/time-entries/23",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"time-entries",
+								"23"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/time-entries",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"projectid\": 123,\n\t\"userid\": 456,\n    \"hours\": 10,\n    \"date\": \"2018-10-02\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/time-entries/31",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"time-entries",
+								"31"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/health",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"projectid\": 123,\n\t\"userid\": 456,\n    \"hours\": 10,\n    \"date\": \"2018-10-02\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/health",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"health"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/info",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"projectid\": 123,\n\t\"userid\": 456,\n    \"hours\": 10,\n    \"date\": \"2018-10-02\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/info",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"info"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/metrics",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"projectid\": 123,\n\t\"userid\": 456,\n    \"hours\": 10,\n    \"date\": \"2018-10-02\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/metrics",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"metrics"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "dev",
+			"item": [
+				{
+					"name": "dev",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"projectid\": 123,\n\t\"userid\": 456,\n    \"hours\": 10,\n    \"date\": \"2018-10-02\"\n}"
+						},
+						"url": {
+							"raw": "http://pal-tracker-56f6f27f-4093-44ae-a674-0c982f7e1c96-dev.cfapps.io//time-entries",
+							"protocol": "http",
+							"host": [
+								"pal-tracker-56f6f27f-4093-44ae-a674-0c982f7e1c96-dev",
+								"cfapps",
+								"io"
+							],
+							"path": [
+								"",
+								"time-entries"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "review",
+			"item": [
+				{
+					"name": "review",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"projectid\": 123,\n\t\"userid\": 456,\n    \"hours\": 10,\n    \"date\": \"2018-10-02\"\n}"
+						},
+						"url": {
+							"raw": "http://pal-tracker-56f6f27f-4093-44ae-a674-0c982f7e1c96.cfapps.io/time-entries",
+							"protocol": "http",
+							"host": [
+								"pal-tracker-56f6f27f-4093-44ae-a674-0c982f7e1c96",
+								"cfapps",
+								"io"
+							],
+							"path": [
+								"time-entries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "review",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"projectid\": 123,\n\t\"userid\": 456,\n    \"hours\": 10,\n    \"date\": \"2018-10-02\"\n}"
+						},
+						"url": {
+							"raw": "http://pal-tracker-56f6f27f-4093-44ae-a674-0c982f7e1c96.cfapps.io/time-entries",
+							"protocol": "http",
+							"host": [
+								"pal-tracker-56f6f27f-4093-44ae-a674-0c982f7e1c96",
+								"cfapps",
+								"io"
+							],
+							"path": [
+								"time-entries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "review",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"projectid\": 123,\n\t\"userid\": 456,\n    \"hours\": 10,\n    \"date\": \"2018-10-02\"\n}"
+						},
+						"url": {
+							"raw": "http://pal-tracker-56f6f27f-4093-44ae-a674-0c982f7e1c96.cfapps.io/time-entries/51",
+							"protocol": "http",
+							"host": [
+								"pal-tracker-56f6f27f-4093-44ae-a674-0c982f7e1c96",
+								"cfapps",
+								"io"
+							],
+							"path": [
+								"time-entries",
+								"51"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

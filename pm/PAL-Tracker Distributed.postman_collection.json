@@ -15,14 +15,24 @@
 							"listen": "test",
 							"script": {
 								"id": "359a83f9-19cf-47da-bb9a-bbb9392054c0",
-								"type": "text/javascript",
 								"exec": [
 									"pm.globals.set(\"USER_ID\", pm.response.json().id);"
-								]
+								],
+								"type": "text/javascript"
 							}
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -103,6 +113,16 @@
 				{
 					"name": "users - Read by user id",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
@@ -135,24 +155,34 @@
 							"listen": "prerequest",
 							"script": {
 								"id": "ddadba9a-f5b0-414a-86ed-9dd1ec3d49bb",
-								"type": "text/javascript",
 								"exec": [
 									""
-								]
+								],
+								"type": "text/javascript"
 							}
 						},
 						{
 							"listen": "test",
 							"script": {
 								"id": "28c4c44f-aca1-4aa6-b1da-39d2c6e6bd69",
-								"type": "text/javascript",
 								"exec": [
 									"pm.globals.set(\"ACCOUNT_ID\", pm.response.json()[0].id);"
-								]
+								],
+								"type": "text/javascript"
 							}
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
@@ -190,14 +220,24 @@
 							"listen": "test",
 							"script": {
 								"id": "314ed8d3-67de-4397-bbf2-43d49acbd392",
-								"type": "text/javascript",
 								"exec": [
 									"pm.globals.set(\"PROJECT_ID\", pm.response.json().id);"
-								]
+								],
+								"type": "text/javascript"
 							}
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -211,7 +251,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Basket Weaving\",\n\t\"accountId\": {{ACCOUNT_ID}}\n}"
+							"raw": "{\n\t\"name\": \"Basket Weaving {{$guid}}\",\n\t\"accountId\": {{ACCOUNT_ID}}\n}"
 						},
 						"url": {
 							"raw": "localhost:8083/projects",
@@ -286,24 +326,34 @@
 							"listen": "prerequest",
 							"script": {
 								"id": "ddadba9a-f5b0-414a-86ed-9dd1ec3d49bb",
-								"type": "text/javascript",
 								"exec": [
 									""
-								]
+								],
+								"type": "text/javascript"
 							}
 						},
 						{
 							"listen": "test",
 							"script": {
 								"id": "f605df8a-275f-4fd7-86f1-19b8be0c6596",
-								"type": "text/javascript",
 								"exec": [
 									"pm.globals.set(\"PROJECT_ID\", pm.response.json()[0].id);"
-								]
+								],
+								"type": "text/javascript"
 							}
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
@@ -345,14 +395,24 @@
 							"listen": "test",
 							"script": {
 								"id": "338ae990-0e0e-442c-9aff-1ec1a7224a21",
-								"type": "text/javascript",
 								"exec": [
 									"pm.globals.set(\"ALLOCATION_ID\", pm.response.json().id);"
-								]
+								],
+								"type": "text/javascript"
 							}
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -445,24 +505,34 @@
 							"listen": "prerequest",
 							"script": {
 								"id": "ddadba9a-f5b0-414a-86ed-9dd1ec3d49bb",
-								"type": "text/javascript",
 								"exec": [
 									""
-								]
+								],
+								"type": "text/javascript"
 							}
 						},
 						{
 							"listen": "test",
 							"script": {
 								"id": "82851d65-a060-4e56-a378-1c0ffb44685b",
-								"type": "text/javascript",
 								"exec": [
 									""
-								]
+								],
+								"type": "text/javascript"
 							}
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
@@ -504,14 +574,24 @@
 							"listen": "test",
 							"script": {
 								"id": "e2476bbb-e601-4a83-a1b2-3d42c6179007",
-								"type": "text/javascript",
 								"exec": [
 									""
-								]
+								],
+								"type": "text/javascript"
 							}
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -604,24 +684,34 @@
 							"listen": "prerequest",
 							"script": {
 								"id": "ddadba9a-f5b0-414a-86ed-9dd1ec3d49bb",
-								"type": "text/javascript",
 								"exec": [
 									""
-								]
+								],
+								"type": "text/javascript"
 							}
 						},
 						{
 							"listen": "test",
 							"script": {
 								"id": "a985311c-5f13-44ee-b1cf-3d20de2201ee",
-								"type": "text/javascript",
 								"exec": [
 									""
-								]
+								],
+								"type": "text/javascript"
 							}
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
@@ -663,14 +753,24 @@
 							"listen": "test",
 							"script": {
 								"id": "a96d9727-cbc8-4c8b-b124-c205412525c1",
-								"type": "text/javascript",
 								"exec": [
 									""
-								]
+								],
+								"type": "text/javascript"
 							}
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -763,24 +863,34 @@
 							"listen": "prerequest",
 							"script": {
 								"id": "ddadba9a-f5b0-414a-86ed-9dd1ec3d49bb",
-								"type": "text/javascript",
 								"exec": [
 									""
-								]
+								],
+								"type": "text/javascript"
 							}
 						},
 						{
 							"listen": "test",
 							"script": {
 								"id": "4bbae2ba-b648-4cc0-bbc4-6e1db46b79a3",
-								"type": "text/javascript",
 								"exec": [
 									""
-								]
+								],
+								"type": "text/javascript"
 							}
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
@@ -827,7 +937,6 @@
 							"listen": "test",
 							"script": {
 								"id": "531f68a0-8eba-45ae-9a07-19f51904de88",
-								"type": "text/javascript",
 								"exec": [
 									"pm.globals.set(\"USER_ID\", pm.response.json().id);",
 									"",
@@ -838,11 +947,22 @@
 									"pm.test(\"Successful POST request\", function () {",
 									"    pm.expect(pm.response.code).to.be.oneOf([200,201,202]);",
 									"});"
-								]
+								],
+								"type": "text/javascript"
 							}
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -929,16 +1049,26 @@
 							"listen": "test",
 							"script": {
 								"id": "2c0cd225-67ec-473f-8960-a0776c2c4293",
-								"type": "text/javascript",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});"
-								]
+								],
+								"type": "text/javascript"
 							}
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
@@ -973,28 +1103,38 @@
 							"listen": "prerequest",
 							"script": {
 								"id": "ddadba9a-f5b0-414a-86ed-9dd1ec3d49bb",
-								"type": "text/javascript",
 								"exec": [
 									""
-								]
+								],
+								"type": "text/javascript"
 							}
 						},
 						{
 							"listen": "test",
 							"script": {
 								"id": "2cac2a84-f785-4b46-8878-e91e5bb8aae0",
-								"type": "text/javascript",
 								"exec": [
 									"pm.globals.set(\"ACCOUNT_ID\", pm.response.json()[0].id);",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});"
-								]
+								],
+								"type": "text/javascript"
 							}
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
@@ -1034,18 +1174,28 @@
 							"listen": "test",
 							"script": {
 								"id": "6df61832-bb96-453d-bcd6-5794981d0fd2",
-								"type": "text/javascript",
 								"exec": [
 									"pm.globals.set(\"PROJECT_ID\", pm.response.json().id);",
 									"",
 									"pm.test(\"Successful POST request\", function () {",
 									"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
 									"});"
-								]
+								],
+								"type": "text/javascript"
 							}
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -1136,28 +1286,38 @@
 							"listen": "prerequest",
 							"script": {
 								"id": "ddadba9a-f5b0-414a-86ed-9dd1ec3d49bb",
-								"type": "text/javascript",
 								"exec": [
 									""
-								]
+								],
+								"type": "text/javascript"
 							}
 						},
 						{
 							"listen": "test",
 							"script": {
 								"id": "56a19178-2279-4673-9e07-963abe0b0a39",
-								"type": "text/javascript",
 								"exec": [
 									"pm.globals.set(\"PROJECT_ID\", pm.response.json()[0].id);",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});"
-								]
+								],
+								"type": "text/javascript"
 							}
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
@@ -1201,18 +1361,28 @@
 							"listen": "test",
 							"script": {
 								"id": "e858261c-7c8d-40d3-bb9f-a4409f0f5858",
-								"type": "text/javascript",
 								"exec": [
 									"pm.globals.set(\"ALLOCATION_ID\", pm.response.json().id);",
 									"",
 									"pm.test(\"Successful POST request\", function () {",
 									"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
 									"});"
-								]
+								],
+								"type": "text/javascript"
 							}
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -1308,26 +1478,36 @@
 							"listen": "prerequest",
 							"script": {
 								"id": "ddadba9a-f5b0-414a-86ed-9dd1ec3d49bb",
-								"type": "text/javascript",
 								"exec": [
 									""
-								]
+								],
+								"type": "text/javascript"
 							}
 						},
 						{
 							"listen": "test",
 							"script": {
 								"id": "bc81ea30-4845-475b-8403-4a683ef81b72",
-								"type": "text/javascript",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});"
-								]
+								],
+								"type": "text/javascript"
 							}
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
@@ -1372,16 +1552,26 @@
 							"listen": "test",
 							"script": {
 								"id": "0362e818-8b8e-4255-b2c9-f18516962116",
-								"type": "text/javascript",
 								"exec": [
 									"pm.test(\"Successful POST request\", function () {",
 									"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
 									"});"
-								]
+								],
+								"type": "text/javascript"
 							}
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -1477,26 +1667,36 @@
 							"listen": "prerequest",
 							"script": {
 								"id": "ddadba9a-f5b0-414a-86ed-9dd1ec3d49bb",
-								"type": "text/javascript",
 								"exec": [
 									""
-								]
+								],
+								"type": "text/javascript"
 							}
 						},
 						{
 							"listen": "test",
 							"script": {
 								"id": "d975deac-abd5-49b8-a274-8fe3f1eac15b",
-								"type": "text/javascript",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});"
-								]
+								],
+								"type": "text/javascript"
 							}
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
@@ -1541,16 +1741,26 @@
 							"listen": "test",
 							"script": {
 								"id": "146f45be-b28a-493c-a548-1f9db22caf39",
-								"type": "text/javascript",
 								"exec": [
 									"pm.test(\"Successful POST request\", function () {",
 									"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
 									"});"
-								]
+								],
+								"type": "text/javascript"
 							}
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -1646,26 +1856,36 @@
 							"listen": "prerequest",
 							"script": {
 								"id": "ddadba9a-f5b0-414a-86ed-9dd1ec3d49bb",
-								"type": "text/javascript",
 								"exec": [
 									""
-								]
+								],
+								"type": "text/javascript"
 							}
 						},
 						{
 							"listen": "test",
 							"script": {
 								"id": "64cc33ad-9a9a-4136-b94d-332bce997066",
-								"type": "text/javascript",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});"
-								]
+								],
+								"type": "text/javascript"
 							}
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
@@ -1725,10 +1945,6 @@
 					}
 				}
 			]
-		},
-		{
-			"name": "dev",
-			"item": []
 		}
 	]
 }
