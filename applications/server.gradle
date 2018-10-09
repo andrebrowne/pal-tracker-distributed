@@ -23,15 +23,15 @@ dependencies {
     testCompile project(":components:test-support")
 }
 
-test.environment([
-    "REGISTRATION_SERVER_ENDPOINT": "http://registration-server"
-])
-
 bootRun.environment([
     "APPLICATION_OAUTH_ENABLED": true,
-    "REGISTRATION_SERVER_ENDPOINT": "http://registration-server",
     "SECURITY_OAUTH2_CLIENT_CLIENT_ID": "tracker-client",
     "SECURITY_OAUTH2_CLIENT_CLIENT_SECRET": "supersecret",
+    "REGISTRATION_SERVER_ENDPOINT": "http://registration-server",
     "SECURITY_USER_NAME": "actuator",
     "SECURITY_USER_PASSWORD": "operations4red"
+])
+
+test.environment([
+    "REGISTRATION_SERVER_ENDPOINT": "http://registration-server",
 ])

@@ -14,4 +14,3 @@ applications:
   - tracker-config-server
   buildpacks:
   - java_buildpack
-
