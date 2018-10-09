@@ -2,12 +2,28 @@ import io.pivotal.pal.tracker.gradlebuild.DependenciesGraphPlugin
 
 buildscript {
     ext {
-        springBootVersion = "1.5.7.RELEASE"
+        // PAL
+        //springBootVersion = "1.5.7.RELEASE"
+        //springVersion = "4.3.8.RELEASE"
+        //mysqlVersion = "8.0.12"
+        //springCloudDependenciesVersion = "Edgware.RELEASE"
+        //springCloudServicesVersion = "1.6.0.RELEASE"
+        //springCloudSsoVersion = "2.0.0.RELEASE"
+        // Service Discovery
+        //springBootVersion = "1.5.7.RELEASE"
+        //springVersion = "4.3.8.RELEASE"
+        //mysqlVersion = "8.0.11"
+        //springCloudDependenciesVersion = "Dalston.SR1"
+        //springCloudServicesVersion = "1.5.0.RELEASE"
+        // SSO
+        // Config Server
+        springBootVersion = "1.5.4.RELEASE"
         springVersion = "4.3.8.RELEASE"
-        mysqlVersion = "8.0.12"
-        springCloudDependenciesVersion = "Edgware.RELEASE"
-        springCloudServicesVersion = "1.6.0.RELEASE"
+        mysqlVersion = "8.0.11"
+        springCloudDependenciesVersion = "Dalston.SR4"
+        springCloudServicesVersion = "1.5.0.RELEASE"
         springCloudSsoVersion = "2.0.0.RELEASE"
+        // Misc.
         //springBootVersion = "2.0.5.RELEASE"
         //springVersion = "5.1.0.RELEASE"
         //springCloudServicesVersion = "1.6.0.RELEASE"
